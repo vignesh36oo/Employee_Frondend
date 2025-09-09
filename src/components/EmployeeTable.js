@@ -236,7 +236,7 @@ function EmployeeTable({ refreshTrigger }) {
             }}
           />
           <TextField label="Department" name="department" value={selectedEmployee?.department || ''} onChange={handleChange} />
-          <TextField label="Salary" name="salary" type="number" value={selectedEmployee?.salary || ''} onChange={handleChange} />
+          <TextField label="Salary" name="salary" type="number" value={selectedEmployee?.salary?.$numberDecimal || ''} onChange={handleChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditClose}>Cancel</Button>
