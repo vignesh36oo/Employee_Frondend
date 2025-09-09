@@ -181,7 +181,12 @@ function EmployeeTable({ refreshTrigger }) {
                 <TableCell>{emp.name}</TableCell>
                 <TableCell>{emp.email}</TableCell>
                 <TableCell>{emp.department}</TableCell>
-                <TableCell>{emp.salary}</TableCell>
+                {
+                  console.log("vdvdvdvdvdvdv", emp.salary)
+                }
+                <TableCell>
+                 {emp.salary?.$numberDecimal || emp.salary.toString()}
+                  </TableCell>
                 <TableCell>
                   <Tooltip title="Edit Employee" arrow>
                     <IconButton onClick={() => handleEditOpen(emp)} color="primary"><Edit /></IconButton>
