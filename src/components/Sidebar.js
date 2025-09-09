@@ -17,7 +17,7 @@ const drawerWidth = 240;
 
 const Sidebar = ({ onNavigate, activePage }) => {
   const navItems = [
-    { label: 'Dashboard', icon: <DashboardIcon />, key: 'dashboard' },
+    { label: 'Dashboard', icon: <DashboardIcon />, key: '' },
     { label: 'Employee', icon: <PeopleIcon />, key: 'employee' },
   ];
 
