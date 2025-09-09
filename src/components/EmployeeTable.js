@@ -74,7 +74,11 @@ function EmployeeTable({ refreshTrigger }) {
   };
 
   const handleEditOpen = (employee) => {
-    setSelectedEmployee(employee);
+    let emplyeedata ={
+      ...employee,
+      salary: employee.salary?.$numberDecimal ? parseFloat(employee.salary.$numberDecimal) : employee.salary
+    }
+    setSelectedEmployee(emplyeedata);
     setEditDialogOpen(true);
   };
 
@@ -99,11 +103,21 @@ function EmployeeTable({ refreshTrigger }) {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    const parsedValue = type === 'number' ? Number(value) || '' : value;
-    setSelectedEmployee({ ...selectedEmployee, [name]: parsedValue });
-  };
+ const handleChange = (e) => {
+  const { name, value, type } = e.target;
+
+  let parsedValue = value;
+
+  if (type === 'number') {
+    // Allow empty string while typing
+    parsedValue = value === '' ? '' : Number(value);
+  }
+
+  setSelectedEmployee((prev) => ({
+    ...prev,
+    [name]: parsedValue,
+  }));
+};
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -236,7 +250,19 @@ function EmployeeTable({ refreshTrigger }) {
             }}
           />
           <TextField label="Department" name="department" value={selectedEmployee?.department || ''} onChange={handleChange} />
-          <TextField label="Salary" name="salary" type="number" value={selectedEmployee?.salary?.$numberDecimal || ''} onChange={handleChange} />
+          <TextField
+  label="Salary"
+  name="salary"
+  type="number"
+  value={
+    selectedEmployee?.salary?.$numberDecimal ??
+    selectedEmployee?.salary ??
+    ''
+  }
+  onChange={handleChange}
+  InputLabelProps={{ shrink: true }} // keeps label visible even if empty
+/>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditClose}>Cancel</Button>
