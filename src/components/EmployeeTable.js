@@ -181,9 +181,6 @@ function EmployeeTable({ refreshTrigger }) {
                 <TableCell>{emp.name}</TableCell>
                 <TableCell>{emp.email}</TableCell>
                 <TableCell>{emp.department}</TableCell>
-                {
-                  console.log("vdvdvdvdvdvdv", emp.salary)
-                }
                 <TableCell>
                  {emp.salary?.$numberDecimal || emp.salary.toString()}
                   </TableCell>
